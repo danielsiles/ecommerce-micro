@@ -52,7 +52,8 @@ func MiddlewareCurrentUser(next http.Handler) http.Handler {
 			return
 		}
 		// add the product to the context
-		ctx := context.WithValue(r.Context(), "currentUser", claims)
+		ctx := context.WithValue(r.Context(), "currentUser", claims["user_id"])
+
 		r = r.WithContext(ctx)
 
 		// Call the next handler, which can be another middleware in the chain, or the final handler.
