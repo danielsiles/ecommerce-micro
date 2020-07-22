@@ -1,4 +1,4 @@
-module github.com/danielsiles/ecommerce-micro-commom
+module github.com/danielsiles/ecommerce-micro-commom2
 
 go 1.14
 
