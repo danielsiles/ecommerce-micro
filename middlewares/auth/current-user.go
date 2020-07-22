@@ -21,13 +21,16 @@ func MiddlewareCurrentUser(next http.Handler) http.Handler {
 		session, err := SessionStore.Get(r, "SESSION_SECRET")
 		if err != nil || session == nil {
 			fmt.Println("Session expired")
+			rw.WriteHeader(http.StatusUnauthorized)
+			rw.Write("Unauthorized")
+			return
 		}
-
-		fmt.Println("TESTE2")
 
 		tokenValue, ok := session.Values["token"]
 		if !ok {
 			fmt.Println("Session expired")
+			rw.WriteHeader(http.StatusUnauthorized)
+			rw.Write("Unauthorized")
 			return
 		}
 
@@ -44,6 +47,8 @@ func MiddlewareCurrentUser(next http.Handler) http.Handler {
 		claims, ok := token.Claims.(jwt.MapClaims)
 		if !ok || !token.Valid {
 			fmt.Println("Invalid token")
+			rw.WriteHeader(http.StatusUnauthorized)
+			rw.Write("Unauthorized")
 			return
 		}
 		// add the product to the context
