@@ -48,7 +48,7 @@ func MiddlewareCurrentUser(next http.Handler) http.Handler {
 		if !ok || !token.Valid {
 			fmt.Println("Invalid token")
 			rw.WriteHeader(http.StatusUnauthorized)
-			rw.Write([]byte("Unauthorized"))
+			rw.Write([]byte("Unauthorized!"))
 			return
 		}
 		// add the product to the context
