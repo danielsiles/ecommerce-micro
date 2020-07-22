@@ -22,7 +22,7 @@ func MiddlewareCurrentUser(next http.Handler) http.Handler {
 		if err != nil || session == nil {
 			fmt.Println("Session expired")
 			rw.WriteHeader(http.StatusUnauthorized)
-			rw.Write("Unauthorized")
+			rw.Write([]byte("Unauthorized"))
 			return
 		}
 
@@ -30,7 +30,7 @@ func MiddlewareCurrentUser(next http.Handler) http.Handler {
 		if !ok {
 			fmt.Println("Session expired")
 			rw.WriteHeader(http.StatusUnauthorized)
-			rw.Write("Unauthorized")
+			rw.Write([]byte("Unauthorized"))
 			return
 		}
 
@@ -48,7 +48,7 @@ func MiddlewareCurrentUser(next http.Handler) http.Handler {
 		if !ok || !token.Valid {
 			fmt.Println("Invalid token")
 			rw.WriteHeader(http.StatusUnauthorized)
-			rw.Write("Unauthorized")
+			rw.Write([]byte("Unauthorized"))
 			return
 		}
 		// add the product to the context
