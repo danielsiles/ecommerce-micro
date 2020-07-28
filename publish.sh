@@ -73,8 +73,9 @@ increment_version $line
 done;
 rm $filename
 echo $patch > "version.txt"
-}
-
 git add . && git commit -m "updating"
 git tag -a $patch -m "updating tag"
 git push origin master --tags
+}
+
+
